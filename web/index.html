@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="cleaner-token" content="__CLEANER_TOKEN__">
+  <title>Mac Cache Cleaner</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <p class="eyebrow">This Mac · 127.0.0.1 only</p>
+      <h1>Mac Cache Cleaner</h1>
+    </div>
+    <p id="status" class="status" aria-live="polite">Starting</p>
+  </header>
+
+  <section class="hero" aria-labelledby="total-label">
+    <p id="total-label" class="label">Recoverable space</p>
+    <p id="total" class="total">—</p>
+    <p id="total-detail" class="detail">Safe caches, plus items worth a look. Nothing is deleted until you confirm.</p>
+    <div id="progress" class="progress hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Scan progress">
+      <div id="progress-bar"></div>
+    </div>
+    <p id="progress-label" class="progress-label hidden"></p>
+  </section>
+
+  <div class="workspace">
+    <nav class="section-nav" aria-label="Sections">
+      <p class="nav-title">Sections</p>
+      <label class="nav-search">
+        <span class="sr">Search apps or paths</span>
+        <input type="search" id="query" placeholder="Search apps or paths" autocomplete="off">
+      </label>
+      <div id="nav-list"></div>
+    </nav>
+    <div class="workspace-main">
+  <div class="toolbar">
+    <button type="button" id="select-safe">Select Safe Items</button>
+    <button type="button" id="select-review">Review Recommended</button>
+    <button type="button" id="select-installers">Select Old Installations</button>
+    <button type="button" id="select-none">Deselect All</button>
+    <button type="button" id="rescan">Rescan</button>
+    <button type="button" id="clean" class="primary" disabled>Clean Selected</button>
+    <label class="filter"><input type="checkbox" id="hide-small" checked> Hide items under 10 MB</label>
+  </div>
+  <div id="banners"></div>
+  <div id="results" class="results hidden"></div>
+  <div id="warnings"></div>
+  <main id="categories"></main>
+
+  <footer class="foot">
+    <p>Dry run until you press Clean Selected. Each app has Select these caches. Old installations have their own button and go to the Trash, which you still need to empty. Caches and logs are deleted permanently. No account, no telemetry, no cloud.</p>
+  </footer>
+    </div>
+  </div>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <h2 id="modal-title">Confirm cleanup</h2>
+      <div id="modal-body"></div>
+      <div class="modal-actions">
+        <button type="button" id="modal-cancel">Cancel</button>
+        <button type="button" id="modal-confirm" class="danger" disabled>Clean selected</button>
+      </div>
+    </div>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>

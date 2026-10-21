@@ -58,7 +58,7 @@ chmod +x cleanup.command
 
 Or double-click `Start.command` in Finder. It opens `http://127.0.0.1:<port>/` in the browser. Leave the Terminal window open while you use it. Control-C stops the server.
 
-The page is a dry run. **Select Safe Items**, **Review Recommended**, **Select Old Installations**, and **Deselect All** only change checkboxes. Each app also has **Select these caches**. **Clean Selected** shows the paths, the total, and whether each one is permanent or moved to the Trash. Permanent cache deletes need an extra confirmation. If Chrome, Cursor, WhatsApp, Safari, or VS Code is open, those caches stay held until you check the box that says to remove them anyway. It will not quit the app for you.
+The page is a dry run. **Select Safe Items**, **Review Recommended**, **Select Old Installations**, and **Deselect All** only change checkboxes. Each app also has **Select these caches**. **Clean Selected** shows the paths, the total, and whether each one is permanent or moved to the Trash. Permanent cache deletes need an extra confirmation. If Cursor, WhatsApp, Safari, or VS Code is open, those caches stay held until you check the box that says to remove them anyway. It will not quit the app for you. Chrome is different: while Google Chrome is open, Clean Selected shows a Terminal command. Quit Google Chrome and Google updater, paste the command, and it removes only the Chrome caches you selected. The command does nothing if either is still open.
 
 Afterward you get:
 
@@ -162,15 +162,24 @@ Permanent. Close Cursor first. Safe, except where noted:
 - `~/Library/Caches/com.todesktop.230313mzl4w4u92` and other `com.todesktop.*` caches
 - `~/Library/Caches/cursor-compile-cache`
 - `~/Library/Caches/*.ShipIt` updater leftovers for Cursor
+- `~/Library/Application Support/Cursor/Partitions/<window>/Cache`
+- `~/Library/Application Support/Cursor/Partitions/<window>/Code Cache`
+- `~/Library/Application Support/Cursor/Partitions/<window>/GPUCache`
+- `~/Library/Application Support/Cursor/Partitions/<window>/DawnGraphiteCache`
+- `~/Library/Application Support/Cursor/Partitions/<window>/DawnWebGPUCache`
+
+The partition `Cache` folder is Cursor's embedded browser cache. It is separate from the application `Cache` folder and is the one that grows past 20 GB. A locked file inside a cache does not stop the rest of that cache from being removed.
 
 Review recommended:
 
 - `~/Library/Application Support/Cursor/update-supervisor`
 - `~/Library/Application Support/Cursor/Service Worker/CacheStorage`
 - `~/Library/Application Support/Cursor/Service Worker/ScriptCache`
+- `~/Library/Application Support/Cursor/Partitions/<window>/Service Worker/CacheStorage`
+- `~/Library/Application Support/Cursor/Partitions/<window>/Service Worker/ScriptCache`
 - `~/Library/Application Support/Cursor/CachedProfilesData`
 
-Not included: `User` (settings, workspace storage, chat history), `AgentStores`, `Backups`, `blob_storage`, `snapshots`, `Partitions`, cookies, and `~/.cursor`.
+Not included: `User` (settings, workspace storage, chat history, including `state.vscdb`), `AgentStores`, `Backups`, `blob_storage`, `snapshots`, cookies and storage inside a partition, and `~/.cursor`.
 
 ### Visual Studio Code
 
